@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Jogo da Velha</title>
+        <script type="text/javascript" src="js/jogodavelha.js"></script>
+        <style>
+            td{
+                text-align: center;
+                height: 25px;
+                width: 25px;
+            }
+        </style>
+    </head>
+    <body>
+        <table style="border-collapse: collapse;" id="tabela">
+            <tr style="border-bottom: 1px solid;">
+                <td style="border-right: 1px solid;" onclick="desenhar(1);" id="casa1"></td>
+                <td style="border-right: 1px solid;" onclick="desenhar(2);" id="casa2"></td>
+                <td onclick="desenhar(3);" id="casa3"></td>
+            </tr>
+            <tr style="border-bottom: 1px solid;">
+                <td style="border-right: 1px solid;" onclick="desenhar(4);" id="casa4"></td>
+                <td style="border-right: 1px solid;" onclick="desenhar(5);" id="casa5"></td>
+                <td onclick="desenhar(6);" id="casa6"></td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid;" onclick="desenhar(7);" id="casa7"></td>
+                <td style="border-right: 1px solid;" onclick="desenhar(8);" id="casa8"></td>
+                <td onclick="desenhar(9);" id="casa9"></td>
+            </tr>
+        </table>
+
+        <div id="vencedor"></div>
+    </body>
+</html>
