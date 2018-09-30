@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+body{
+    background-color: #EEE;
+}
+
+.divJogoDaVelha{
+    background: linear-gradient(#9575CD, #512DA8);
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botao{
+    text-transform: uppercase;
+    height: 36px;
+    background-color: #673AB7;
+    color: white;
+    border: 0;
+    margin: 15px 5px 15px 5px;
+    font-size: 14px;
+    padding: 0px 16px;
+    border-radius: 2px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 3px 4px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.20);
+}
+.botao:hover{
+    background-color: #5E35B1;
+}
+.botao:active {
+    background-color: #512DA8;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.14), 0 3px 14px rgba(0, 0, 0, 0.12), 0 4px 15px rgba(0, 0, 0, 0.20);
+}
+
+.placar{
+    width: 150px;
+    font-size: 25px;
+    margin: 0px 5px 15px;
+    padding: 10px 15px 10px;
+    display: inline-block;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 3px 4px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.20);
+}
+.placar>div{
+    float: left;
+}
+.placar>div:last-child{
+    float: right;
+}
+
+#tabuleiro{
+    border-collapse: collapse;
+    margin: 0 auto;
+    z-index: 1;
+}
+#tabuleiro td{
+    width: 105px;
+    height: 105px;
+    font-size: 50px;
+    color: #000;
+    text-align: center;
+}
+#tabuleiro tr:first-child{
+    border-bottom: 4px solid #673AB7;
+}
+#tabuleiro tr:last-child{
+    border-top: 4px solid #673AB7;
+}
+#tabuleiro td:first-child{
+    border-right: 4px solid #673AB7;
+}
+#tabuleiro td:last-child{
+    border-left: 4px solid #673AB7;
+}
+
+.linhaHorizontal{
+    background: url(../img/linha-horizontal.png);
+}
+.linhaVertical{
+    background: url(../img/linha-vertical.png);
+}
+.linhaDiagonal1{
+    background: url(../img/linha-diagonal1.png);
+}
+.linhaDiagonal2{
+    background: url(../img/linha-diagonal2.png);
+}
+
+#vezDoJogador{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #673AB7;
+}
+
+#resultado{
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 15px;
+    color: #673AB7;
+}

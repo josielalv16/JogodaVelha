@@ -1,36 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="pt-br">
     <head>
         <title>Jogo da Velha</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/jogodavelha.css" />
         <script type="text/javascript" src="js/jogodavelha.js"></script>
-        <style>
-            td{
-                text-align: center;
-                height: 25px;
-                width: 25px;
-            }
-        </style>
     </head>
     <body>
-        <table style="border-collapse: collapse;" id="tabela">
-            <tr style="border-bottom: 1px solid;">
-                <td style="border-right: 1px solid;" onclick="desenhar(1);" id="casa1"></td>
-                <td style="border-right: 1px solid;" onclick="desenhar(2);" id="casa2"></td>
-                <td onclick="desenhar(3);" id="casa3"></td>
-            </tr>
-            <tr style="border-bottom: 1px solid;">
-                <td style="border-right: 1px solid;" onclick="desenhar(4);" id="casa4"></td>
-                <td style="border-right: 1px solid;" onclick="desenhar(5);" id="casa5"></td>
-                <td onclick="desenhar(6);" id="casa6"></td>
-            </tr>
-            <tr>
-                <td style="border-right: 1px solid;" onclick="desenhar(7);" id="casa7"></td>
-                <td style="border-right: 1px solid;" onclick="desenhar(8);" id="casa8"></td>
-                <td onclick="desenhar(9);" id="casa9"></td>
-            </tr>
-        </table>
-
-        <div id="vencedor"></div>
+        <div class="divJogoDaVelha">
+            <h1>Jogo da Velha</h1>
+        </div>
+        <div>
+            <button class="botao" id="novoJogo">Novo Jogo</button>
+            <button class="botao" id="resetarPlacar">Resetar Placar</button>
+            <button class="botao" id="comecarX">Começar com "X"</button>
+            <button class="botao" id="comecarO">Começar com "O"</button>
+        </div>
+        <div>
+            <div class="placar">
+                <div>X</div>
+                <div id="placarX">0</div>
+            </div>
+            <div class="placar">
+                <div>O</div>
+                <div id="placarO">0</div>
+            </div>
+        </div>
+        
+        <div id="vezDoJogador">Vez do X</div>
+        <div id="baseTabuleiro"></div>
+        <div id="resultado"></div>
     </body>
 </html>

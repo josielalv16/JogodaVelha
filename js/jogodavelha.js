@@ -1,61 +1,151 @@
-var aux = 1;
-function desenhar(c){
-    var tabela = document.getElementById("tabela");
-    var casa = document.getElementById("casa"+c);
+var vezDo = "X";
+var placarX = 0;
+var placarO = 0;
+var jogando = 1;
 
-    if(casa.textContent == "" ){
-        if(aux == 1){
-            casa.innerHTML = "X";
-            verificarVencedor();
-            aux = 0;
-        }else{
-            casa.innerHTML = "O"
-            verificarVencedor();
-            aux = 1;
+window.onload = function(){
+    criarTabuleiro();
+    
+    document.getElementById("novoJogo").onclick = function(){
+        criarTabuleiro();
+        jogando = 1;
+        document.getElementById("resultado").innerText = "";
+    }
+
+    document.getElementById("resetarPlacar").onclick = function(){
+        placarO = 0;
+        placarX = 0;
+        document.getElementById("placarX").innerText = placarX;
+        document.getElementById("placarO").innerText = placarO;
+    }
+
+    document.getElementById("comecarX").onclick = function(){
+        vezDo = "X";
+        vezDoJogador();
+    }
+    document.getElementById("comecarO").onclick = function(){
+        vezDo = "O";
+        vezDoJogador();
+    }
+
+    vezDoJogador();
+}
+
+function vezDoJogador(){
+    document.getElementById("vezDoJogador").innerText = 'Vez do "' + vezDo + '"';
+}
+
+function criarTabuleiro(){
+    var baseTabuleiro = document.getElementById("baseTabuleiro");
+    var html = "<table id='tabuleiro'>";
+
+    for(var linha = 0; linha < 3; linha++){
+        html += "<tr>";
+        for(var coluna = 0; coluna < 3; coluna++){
+            html += "<td name='casa'></td>";
+        }
+        html += "</tr>";
+    }
+
+    html += "</table>";
+    baseTabuleiro.innerHTML = html;
+
+    var casas = document.getElementsByName("casa");
+    for(var i = 0; i < casas.length; i++){
+        casas[i].onclick = function(){
+            jogar(this);
         }
     }
-    
+}
+
+function jogar(casa){
+    if(jogando == 1){
+        if(casa.innerText == ""){
+            if(vezDo == "X"){
+                casa.innerHTML = "X";
+                vezDo = "O";
+                verificarVencedor();
+            }else{
+                casa.innerHTML = "O"
+                vezDo = "X";
+                verificarVencedor();
+            }
+            vezDoJogador();
+        }
+    }
 }
 
 function verificarVencedor(){
-    var casa1 = document.getElementById("casa1").textContent;
-    var casa2 = document.getElementById("casa2").textContent;
-    var casa3 = document.getElementById("casa3").textContent;
-    var casa4 = document.getElementById("casa4").textContent;
-    var casa5 = document.getElementById("casa5").textContent;
-    var casa6 = document.getElementById("casa6").textContent;
-    var casa7 = document.getElementById("casa7").textContent;
-    var casa8 = document.getElementById("casa8").textContent;
-    var casa9 = document.getElementById("casa9").textContent;
+    //Ganhador = 1 para X; 0 para O;
+    var ganhador = null;
+    var vazio = 0;
+    var casas = document.getElementsByName("casa");
 
-
-    if(casa1 == "X" && casa2 == "X" && casa3 == "X"){xVencedor();}
-    else if(casa1 == "X" && casa4 == "X" && casa7 == "X"){xVencedor();}
-    else if(casa1 == "X" && casa5 == "X" && casa9 == "X"){xVencedor();}
-    else if(casa2 == "X" && casa5 == "X" && casa8 == "X"){xVencedor();}
-    else if(casa3 == "X" && casa5 == "X" && casa7 == "X"){xVencedor();}
-    else if(casa3 == "X" && casa6 == "X" && casa9 == "X"){xVencedor();}
-    else if(casa4 == "X" && casa5 == "X" && casa6 == "X"){xVencedor();}
-    else if(casa7 == "X" && casa8 == "X" && casa9 == "X"){xVencedor();}
-
-    if(casa1 == "O" && casa2 == "O" && casa3 == "O"){oVencedor();}
-    else if(casa1 == "O" && casa4 == "O" && casa7 == "O"){oVencedor();}
-    else if(casa1 == "O" && casa5 == "O" && casa9 == "O"){oVencedor();}
-    else if(casa2 == "O" && casa5 == "O" && casa8 == "O"){oVencedor();}
-    else if(casa3 == "O" && casa5 == "O" && casa7 == "O"){oVencedor();}
-    else if(casa3 == "O" && casa6 == "O" && casa9 == "O"){oVencedor();}
-    else if(casa4 == "O" && casa5 == "O" && casa6 == "O"){oVencedor();}
-    else if(casa7 == "O" && casa8 == "O" && casa9 == "O"){oVencedor();}
-
-    if(casa1 != "" && casa2 != "" && casa3 != "" && casa4 != "" && casa5 != "" && 
-        casa6 != "" && casa7 != "" && casa8 != "" && casa9 != ""){
-            document.getElementById("vencedor").innerHTML = "Empate!";
+    //Verifica ganhador nas linhas
+    for(var i = 0; i < casas.length;){
+        if(casas[i].innerText != "" && casas[i].innerText == casas[i+1].innerText && casas[i].innerText == casas[i+2].innerText){
+            //Ganhador = 1 para X; 0 para O
+            ganhador = casas[i].innerText == "X" ? 1 : 0;
+            casas[i].classList.add("linhaHorizontal");
+            casas[i+1].classList.add("linhaHorizontal");
+            casas[i+2].classList.add("linhaHorizontal");
+            break;
+        }else{
+            i += 3;
         }
-}
+    }
 
-function xVencedor(){
-    document.getElementById("vencedor").innerHTML = "X foi o vencedor!!!";
-}
-function oVencedor(){
-    document.getElementById("vencedor").innerHTML = "O foi o vencedor!!!";
+    if(ganhador == null){
+        //Verifica ganhador nas colunas
+        for(var i = 0; i < 3; i++){
+            if(casas[i].innerText != "" && casas[i].innerText == casas[i+3].innerText && casas[i].innerText == casas[i+6].innerText){
+                //Ganhador = 1 para X; 0 para O
+                ganhador = casas[i].innerText == "X" ? 1 : 0;
+                casas[i].classList.add("linhaVertical");
+                casas[i+3].classList.add("linhaVertical");
+                casas[i+6].classList.add("linhaVertical");
+                break;
+            }
+        }
+    }
+
+    if(ganhador == null){
+        //Verifica ganhador nas diagonais
+        if(casas[4].innerText != "" && ((casas[0].innerText == casas[4].innerText && casas[0].innerText == casas[8].innerText) || (casas[2].innerText == casas[4].innerText && casas[2].innerText == casas[6].innerText))) {
+            //Ganhador = 1 para X; 0 para O
+            ganhador = casas[4].innerText == "X" ? 1 : 0;
+            if(casas[0].innerText != "" && casas[0].innerText == casas[4].innerText){
+                casas[0].classList.add("linhaDiagonal1");
+                casas[4].classList.add("linhaDiagonal1");
+                casas[8].classList.add("linhaDiagonal1");
+            }else{
+                casas[2].classList.add("linhaDiagonal2");
+                casas[4].classList.add("linhaDiagonal2");
+                casas[6].classList.add("linhaDiagonal2");
+            }
+        }
+    }
+
+    //Conta casas em branco/vazio
+    for(var i = 0; i < casas.length; i++){
+        if(casas[i].innerText == ""){
+            vazio++;
+        }
+    }
+
+    if(ganhador != null && ganhador == 1){
+        jogando = 0;
+        vezDo = "X";
+        placarX++;
+        document.getElementById("placarX").innerText = placarX;
+        document.getElementById("resultado").innerText = '"X" Ganhou!!!';
+    }else if(ganhador != null){
+        jogando = 0;
+        placarO++;
+        vezDo = "O";
+        document.getElementById("placarO").innerText = placarO;
+        document.getElementById("resultado").innerText = '"O" Ganhou!!!';
+    }else if(ganhador == null && vazio == 0){
+        document.getElementById("resultado").innerText = "Deu Velha!!!";
+    }
 }
