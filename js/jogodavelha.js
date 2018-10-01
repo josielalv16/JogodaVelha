@@ -20,15 +20,31 @@ window.onload = function(){
     }
 
     document.getElementById("comecarX").onclick = function(){
-        vezDo = "X";
-        vezDoJogador();
+        verificarJogando("X");
+        // vezDo = "X";
+        // vezDoJogador();
     }
     document.getElementById("comecarO").onclick = function(){
-        vezDo = "O";
-        vezDoJogador();
+        verificarJogando("O");
+        // vezDo = "O";
+        // vezDoJogador();
     }
 
     vezDoJogador();
+}
+
+function verificarJogando(vez){
+    var casas = document.getElementsByName("casa");
+    var j = 0;
+    for(var i = 0; i < casas.length; i++){
+        if(casas[i].innerText != ""){
+            j++;
+        }
+    }
+    if(j == 0){
+        vezDo = vez;
+        vezDoJogador();
+    }
 }
 
 function vezDoJogador(){
